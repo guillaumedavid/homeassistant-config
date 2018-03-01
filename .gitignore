@@ -2,6 +2,6 @@
 !*.yaml
 !scenes
 !.gitignore
-!custom_components
+!/custom_components
 secrets.yaml
 known_devices.yaml
