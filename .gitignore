@@ -2,6 +2,6 @@
 !*.yaml
 !scenes
 !.gitignore
-!custom_components/*/*.py
+!**/*.py
 secrets.yaml
 known_devices.yaml
