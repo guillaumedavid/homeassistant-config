@@ -1,0 +1,129 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 48.8582
+  longitude: 2.3387
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 0
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Paris
+  # Customization file
+  customize: !include customize.yaml
+
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://192.168.1.25:3218
+
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  base_url: domo.julieetguillaume.fr
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# Tracked history is kept for 10 days
+recorder:
+  purge_keep_days: 10
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+  - platform: linky
+    username: !secret linky_username
+    password: !secret linky_password
+    monitored_variables:
+      - daily_1d_consumption
+      - monthly_current_consumption
+      - yearly_current_consumption
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+# Netatmo
+netatmo:
+  api_key: !secret netatmo_apikey
+  secret_key: !secret netatmo_secret_key
+  username: !secret netatmo_username
+  password: !secret netatmo_password
+
+climate:
+  - platform: netatmo
+  
+camera:
+  - platform: netatmo
+  
+rfxtrx:
+  device: /dev/ttyUSB1
+
+zwave:
+  usb_path: /dev/ttyUSB0
+  
+switch:
+  platform: rfxtrx
+  automatic_add: True
+  devices:
+    0b1100000136961601010f70:
+      name: "lumière canapé"
+    0b1100010136961603010f70:
+      name: "lumière salle à manger"
+    0b1100040136961602010f70:
+      name: "lumière tv"
+
+cover:
+  - platform: rfxtrx
+    automatic_add: True
+    signal_repetitions: 2
+    devices:
+      071a000001020101: # RFY Portail exterieur
+        name: "Portail extérieur"
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

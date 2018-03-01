@@ -1,0 +1,91 @@
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+  - group.portail_exterieur
+  - group.netatmo_exterieur
+  - group.salon_lumieres
+  - group.salon_players
+  - group.salon_netatmo
+  - group.chambre_eloise
+  - group.chambre_clement
+  - group.linky
+
+Extérieur:
+  view: yes
+  icon: mdi:gate
+  entities:
+  - group.portail_exterieur
+  - group.netatmo_exterieur
+Portail Extérieur:
+  - cover.portail_exterieur
+Netatmo Extérieur:
+  control: hidden
+  entities:
+  - sensor.netatmo_exterieur_bois_battery
+  - sensor.netatmo_exterieur_bois_humidity
+  - sensor.netatmo_exterieur_bois_temperature
+  - sensor.netatmo_exterieur_bois_radio
+Salon:
+  view: yes
+  name: "Salon-Salle à manger"
+  entities:
+  - group.salon_lumieres
+  - group.salon_players
+  - group.salon_netatmo
+  - binary_sensor.athome_someone_known
+Salon players:
+  name: "Lecteurs"
+  entities:
+  - media_player.apple_tv
+  - media_player.le40c750_samsung_dtv_rcr
+  - camera.athome
+Salon lumières:
+  entities:
+  - switch.lumiere_canape
+  - switch.lumiere_salle_a_manger
+  - switch.lumiere_tv
+Salon Netatmo:
+  control: hidden
+  entities:
+  - sensor.netatmo_interieur_noise
+  - sensor.netatmo_interieur_co2
+  - sensor.netatmo_interieur_humidity
+  - sensor.netatmo_interieur_pressure
+  - sensor.netatmo_interieur_temperature
+  - sensor.netatmo_interieur_wifi
+Chambres:
+  view: yes
+  name: "Chambres"
+  entities:
+  - group.chambre_eloise
+  - group.chambre_clement
+Chambre Éloïse:
+  control: hidden
+  entities:
+  #- volet
+  #- capteur temperature
+  #- radiateur
+Chambre Clément:
+  control: hidden
+  entities:
+  #- volet
+  #- capteur temperature
+  #- radiateur
+Energie / Infos:
+  view: yes
+  entities:
+  - group.electricite
+  - group.internet
+Electricité:
+  control: hidden
+  entities:
+  - sensor.linky_daily_1d_consumption
+  - sensor.linky_monthly_current_consumption
+  - sensor.linky_yearly_current_consumption
+Internet:
+  control: hidden
+  entities:
+  - sensor.speedtest_download
+  - sensor.speedtest_upload
+  - sensor.speedtest_ping

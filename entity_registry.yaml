@@ -1,0 +1,15 @@
+media_player.apple_tv:
+  platform: apple_tv
+  unique_id: d49b5daa63f30a308b2eb2729ef5b05af471333bbd58f8807d5385ef70fc8249
+remote.apple_tv:
+  platform: apple_tv
+  unique_id: d49b5daa63f30a308b2eb2729ef5b05af471333bbd58f8807d5385ef70fc8249
+binary_sensor.sensor:
+  platform: zwave
+  unique_id: 3-72057594093240320
+switch.switch:
+  platform: zwave
+  unique_id: 4-72057594109837312
+switch.switch_2:
+  platform: zwave
+  unique_id: 5-72057594126614528
