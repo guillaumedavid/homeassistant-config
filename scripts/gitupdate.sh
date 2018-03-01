@@ -1,4 +1,5 @@
 #!/bin/bash
+# test
 cd /config
 git add .
 git status
