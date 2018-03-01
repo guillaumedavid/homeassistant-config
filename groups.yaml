@@ -80,9 +80,17 @@ Energie / Infos:
 Electricité:
   control: hidden
   entities:
-  - sensor.linky_daily_1d_consumption
-  - sensor.linky_monthly_current_consumption
-  - sensor.linky_yearly_current_consumption
+    - sensor.linky_daily_1d_consumption
+    - sensor.linky_daily_2d_consumption
+    - sensor.price_conso_total
+    - sensor.heures_creuses
+    - sensor.price_heures_creuses
+    - sensor.heures_pleines
+    - sensor.price_heures_pleines
+    - sensor.linky_monthly_current_consumption
+    - sensor.linky_monthly_1m_consumption
+    - sensor.linky_yearly_current_consumption
+    - sensor.linky_yearly_2y_consumption
 Internet:
   control: hidden
   entities:

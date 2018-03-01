@@ -71,8 +71,98 @@ sensor:
     password: !secret linky_password
     monitored_variables:
       - daily_1d_consumption
+      - daily_2d_consumption
       - monthly_current_consumption
+      - monthly_1m_consumption
       - yearly_current_consumption
+      - yearly_2y_consumption
+#### To calculate Peak and Off-Peak consumption ####
+      - halfhourly_00_00_consumption
+      - halfhourly_00_30_consumption
+      - halfhourly_01_00_consumption
+      - halfhourly_01_30_consumption
+      - halfhourly_02_00_consumption
+      - halfhourly_02_30_consumption
+      - halfhourly_03_00_consumption
+      - halfhourly_03_30_consumption
+      - halfhourly_04_00_consumption
+      - halfhourly_04_30_consumption
+      - halfhourly_05_00_consumption
+      - halfhourly_05_30_consumption
+      - halfhourly_06_00_consumption
+      - halfhourly_06_30_consumption
+      - halfhourly_07_00_consumption
+      - halfhourly_07_30_consumption
+      - halfhourly_08_00_consumption
+      - halfhourly_08_30_consumption
+      - halfhourly_09_00_consumption
+      - halfhourly_09_30_consumption
+      - halfhourly_10_00_consumption
+      - halfhourly_10_30_consumption
+      - halfhourly_11_00_consumption
+      - halfhourly_11_30_consumption
+      - halfhourly_12_00_consumption
+      - halfhourly_12_30_consumption
+      - halfhourly_13_00_consumption
+      - halfhourly_13_30_consumption
+      - halfhourly_14_00_consumption
+      - halfhourly_14_30_consumption
+      - halfhourly_15_00_consumption
+      - halfhourly_15_30_consumption
+      - halfhourly_16_00_consumption
+      - halfhourly_16_30_consumption
+      - halfhourly_17_00_consumption
+      - halfhourly_17_30_consumption
+      - halfhourly_18_00_consumption
+      - halfhourly_18_30_consumption
+      - halfhourly_19_00_consumption
+      - halfhourly_19_30_consumption
+      - halfhourly_20_00_consumption
+      - halfhourly_20_30_consumption
+      - halfhourly_21_00_consumption
+      - halfhourly_21_30_consumption
+      - halfhourly_22_00_consumption
+      - halfhourly_22_30_consumption
+      - halfhourly_23_00_consumption
+      - halfhourly_23_30_consumption
+######################## Conso Templates ####################################""
+  - platform : template
+    sensors:
+      heures_creuses:
+        friendly_name: 'Heures creuses'
+        value_template: >
+          {{(((states('sensor.linky_halfhourly_23_00_consumption')|float) +(states('sensor.linky_halfhourly_23_30_consumption') |float)+ (states('sensor.linky_halfhourly_00_00_consumption')|float) + (states('sensor.linky_halfhourly_00_30_consumption') |float)+ (states('sensor.linky_halfhourly_01_00_consumption')|float) +(states('sensor.linky_halfhourly_01_30_consumption') |float)+ (states('sensor.linky_halfhourly_02_00_consumption')|float) +(states('sensor.linky_halfhourly_02_30_consumption') |float)+ (states('sensor.linky_halfhourly_03_00_consumption')|float) +(states('sensor.linky_halfhourly_03_30_consumption') |float) +(states('sensor.linky_halfhourly_04_00_consumption') |float)+ (states('sensor.linky_halfhourly_04_30_consumption')|float) + (states('sensor.linky_halfhourly_05_00_consumption') |float)+ (states('sensor.linky_halfhourly_05_30_consumption')|float) +(states('sensor.linky_halfhourly_06_00_consumption') |float)+ (states('sensor.linky_halfhourly_06_30_consumption')|float)  ) /2)| round(3)  }}
+        unit_of_measurement: 'kWh'
+  - platform : template
+    sensors:
+      price_heures_creuses:
+        friendly_name: 'Prix Heures creuses'
+        value_template: >
+          {{ (states.sensor.heures_creuses.state | multiply(0.1252))  | round(2)}}
+        unit_of_measurement: '€'
+  - platform : template
+    sensors:
+      heures_pleines:
+        friendly_name: 'Heures pleines'
+        value_template: >
+          {{((states('sensor.linky_daily_1d_consumption')|float)- (states.sensor.heures_creuses.state)|float) | round (3) }}
+        unit_of_measurement: 'kWh'
+  - platform : template
+    sensors:
+      price_heures_pleines:
+        friendly_name: 'Prix Heures pleines'
+        value_template: >
+          {{ (states.sensor.heures_pleines.state | multiply(0.1593)) | round(2)}}
+        unit_of_measurement: '€'
+  - platform : template
+    sensors:
+      price_conso_total:
+        friendly_name: 'Prix Total'
+        value_template: >
+          {{ ( (states('sensor.price_heures_creuses')|float) + (states('sensor.price_heures_pleines')|float) )|round(2) }}
+        unit_of_measurement: '€'
+
+
   - platform: speedtest
     monitored_conditions:
       - ping
