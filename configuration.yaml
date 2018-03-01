@@ -169,6 +169,15 @@ sensor:
       - download
       - upload
 
+  - platform: synologydsm
+    host: 192.168.1.51
+    username: admin
+    password: ross20
+    monitored_conditions:
+      - cpu_total_load
+      - memory_real_usage
+      - network_up
+      - volume_percentage_used
 # Text to speech
 tts:
   - platform: google
@@ -213,6 +222,12 @@ cover:
     devices:
       071a000001020101: # RFY Portail exterieur
         name: "Portail extérieur"
+      071a000006010101: # RFY volet chambre Eloise
+        name: "Volet Éloïse"
+      071a000006010201: # RFY volet chambre Clement
+        name: "Volet Clément"      
+      071a000006010301: # RFY volet chambre Bureau
+        name: "Volet Bureau"
 
 group: !include groups.yaml
 automation: !include automations.yaml

@@ -1,2 +1,14 @@
 sensor.netatmo_interieur_noise:
   friendly_name: Netatmo Intérieur Bruit
+sensor.linky_daily_1d_consumption:
+  friendly_name: Linky Hier
+sensor.linky_daily_2d_consumption:
+  friendly_name: Linky Avant-Hier
+sensor.linky_yearly_current_consumption:
+  friendly_name: Linky Année en cours
+sensor.linky_yearly_2y_consumption:
+  friendly_name: Linky Année précédente
+sensor.linky_monthly_current_consumption:
+  friendly_name: Linky Mois en cours
+sensor.linky_monthly_1m_consumption:
+  friendly_name: Linky Mois précédent

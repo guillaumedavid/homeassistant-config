@@ -60,16 +60,23 @@ Chambres:
   entities:
   - group.chambre_eloise
   - group.chambre_clement
+  - group.bureau
 Chambre Éloïse:
   control: hidden
   entities:
-  #- volet
+  - cover.volet_eloise
   #- capteur temperature
   #- radiateur
 Chambre Clément:
   control: hidden
   entities:
-  #- volet
+  - cover.volet_clement
+  #- capteur temperature
+  #- radiateur
+Bureau:
+  control: hidden
+  entities:
+  - cover.volet_bureau
   #- capteur temperature
   #- radiateur
 Energie / Infos:
@@ -77,6 +84,7 @@ Energie / Infos:
   entities:
   - group.electricite
   - group.internet
+  - group.synologie
 Electricité:
   control: hidden
   entities:
@@ -97,3 +105,10 @@ Internet:
   - sensor.speedtest_download
   - sensor.speedtest_upload
   - sensor.speedtest_ping
+Synologie:
+  control: hidden
+  entities:
+  - sensor.cpu_load_total
+  - sensor.memory_usage_real
+  - sensor.network_up
+  - sensor.volume_used_volume_1
